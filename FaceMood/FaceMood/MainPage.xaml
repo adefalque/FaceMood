@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:FaceMood"
+             xmlns:ffi="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             x:Class="FaceMood.MainPage"
+             BackgroundColor="White">
+
+    <Grid Margin="0,20,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+        <!--<Frame OutlineColor="Black" Margin="5" BackgroundColor="LightGray">-->
+            <ffi:CachedImage x:Name="ImgPhoto"                              
+                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" 
+                             Source="{Binding ImageSource}"
+                             FadeAnimationEnabled="True"
+                             Error="ImgPhoto_OnError"
+                             Aspect="AspectFill" Margin="10"/>
+        <!--</Frame>-->
+
+        <StackLayout Grid.Column="1">
+            <Label Text="Analysis result" Margin="0,0,10,10" TextColor="Firebrick" FontAttributes="Italic" />
+            <Label FormattedText="{Binding Result}" FontSize="11" />
+        </StackLayout>
+        
+        <!--<skia:SKCanvasView x:Name="ImageCanvas" PaintSurface="SKCanvasView_OnPaintSurface" />-->
+        
+        <ActivityIndicator x:Name="PageActivityIndicator" HorizontalOptions="Center" VerticalOptions="Center"
+                           IsRunning="{Binding IsRunning}"/>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" >
+            <Button Text="SNAP" x:Name="BtTakePhoto" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Command="{Binding TakePhotoCommand}"
+                    Margin="5,10,10,10" TextColor="Ivory" FontSize="25"
+                    WidthRequest="150" HeightRequest="100"
+                    BackgroundColor="DarkSlateGray"/>
+
+            <Button Text="PICK" x:Name="BtPickPhoto" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                    Command="{Binding PickPhotoCommand}" 
+                    Margin="10,10,5,10" TextColor="Ivory" FontSize="25"
+                    WidthRequest="150" HeightRequest="100"
+                    BackgroundColor="DarkSlateGray"/>
+        </StackLayout>
+
+    </Grid>
+</ContentPage>
